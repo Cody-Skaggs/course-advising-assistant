@@ -24,6 +24,8 @@ private:
 public:
 	BinarySearchTree();
 	~BinarySearchTree();
+	BinarySearchTree(const BinarySearchTree&) = delete; // Disable copy constructor
+	BinarySearchTree& operator=(const BinarySearchTree&) = delete; // Disable copy assignment
 
 	void insert(const Course& course);
 	void printInOrder() const;
