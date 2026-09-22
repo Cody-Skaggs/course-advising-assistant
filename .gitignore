@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+Debug/
+Release/
+x64/
+x86/
+
+# Build artifacts
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.tlog
+*.ipch
+*.idb
+*.recipe
+
+# User-specific settings
+*.user
+*.suo
