@@ -18,6 +18,9 @@ BinarySearchTree::BinarySearchTree() {
 }
 
 BinarySearchTree::~BinarySearchTree() {
+	if (root != nullptr) {
+		destroyTree(root);
+	}
 
 }
 
