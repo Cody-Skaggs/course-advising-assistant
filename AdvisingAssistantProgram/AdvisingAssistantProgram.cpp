@@ -137,27 +137,38 @@ void displayMenu() {
 void loadCourses(string fileName, BinarySearchTree* bst) {
 	fstream inFile;
 	string line;
-	vector<string> prereqs;
+
 	inFile.open(fileName);
+
 	if (!inFile) {
-		cout << "Error Opening File!" << endl;
+		cout << "Unable to open file" << endl;
+		return;
 	}
-	else {
-		cout << "File successfully opened!" << endl;
-	}
-	while (inFile.good()) {
-		while (getline(inFile, line)) {
-			Course course;
-			stringstream ss(line);
-			getline(ss, course.courseNumber, ',');
-			getline(ss, course.courseName, ',');
-			getline(ss, course.prereqs.at(0), ',');
-			getline(ss, course.prereqs.at(1), ',');
-			bst->insert(course);
+
+	cout << "File opened successfully" << endl;
+
+	while (getline(inFile, line)) {
+		if (line.empty()) {
+			continue;
 		}
+
+		Course course;
+		string prerequisite;
+		stringstream ss(line);
+
+		getline(ss, course.courseNumber, ',');
+		getline(ss, course.courseName, ',');
+
+		while (getline(ss, prerequisite, ',')) {
+			if (!prerequisite.empty()) {
+				course.prereqs.push_back(prerequisite);
+			}
+		}
+
+		bst->insert(course);
 	}
+
 	inFile.close();
-	
 }
 
 
