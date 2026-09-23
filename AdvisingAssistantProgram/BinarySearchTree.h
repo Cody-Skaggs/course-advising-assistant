@@ -17,7 +17,7 @@ private:
 
 	Node* root;
 
-	void addNode(Node* node, const Course& course);
+	bool addNode(Node* node, const Course& course);
 	void inOrder(Node* node) const;
 	void destroyTree(Node* node);
 
@@ -27,7 +27,7 @@ public:
 	BinarySearchTree(const BinarySearchTree&) = delete; // Disable copy constructor
 	BinarySearchTree& operator=(const BinarySearchTree&) = delete; // Disable copy assignment
 
-	void insert(const Course& course);
+	bool insert(const Course& course);
 	void printInOrder() const;
 	Course search(const std::string& courseNumber) const;
 };

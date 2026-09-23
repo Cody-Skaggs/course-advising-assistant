@@ -28,31 +28,36 @@ void BinarySearchTree::printInOrder() const {
 	inOrder(root);
 }
 
-void BinarySearchTree::addNode(Node* node, const Course& course) {
-	if (node->course.courseNumber.compare(course.courseNumber) > 0) {
+bool BinarySearchTree::addNode(Node* node, const Course& course) {
+	if (node->course.courseNumber.compare(course.courseNumber) > 0) { // If the course number of the current node is greater than the course number of the new course, go left
 		if (node->left == nullptr) {
 			node->left = new Node(course);
+			return true;
+		}
+		else { // If the left child is not null, recursively call addNode on the left child
+			return this->addNode(node->left, course);
+		}
+	}
+	else if (node->course.courseNumber.compare(course.courseNumber) < 0) { // If the course number of the current node is less than the course number of the new course, go right
+		if (node->right == nullptr) {
+			node->right = new Node(course);
+			return true;
 		}
 		else {
-			this->addNode(node->left, course);
+			return this->addNode(node->right, course);
 		}
 	}
 	else {
-		if (node->right == nullptr) {
-			node->right = new Node(course);
-		}
-		else {
-			this->addNode(node->right, course);
-		}
+		return false; // If the course number is equal, do not add the course (no duplicates allowed)
 	}
 }
 
-void BinarySearchTree::insert(const Course& course) {
+bool BinarySearchTree::insert(const Course& course) {
 	if (root == nullptr) {
 		root = new Node(course);
 	}
 	else {
-		this->addNode(root, course);
+		return this->addNode(root, course);
 	}
 }
 
